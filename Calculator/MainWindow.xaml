@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="Calculator" Height="530" Width="320"
         Background="#FFE6E6E6"
+        MinWidth="320"
+        MinHeight="530"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -18,33 +20,44 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*"></RowDefinition>
                 <RowDefinition Height="0.8*"></RowDefinition>
-                <RowDefinition Height="0.3*"></RowDefinition>
+                <RowDefinition Height="0.23*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition MaxWidth="53.3"></ColumnDefinition>
+                <ColumnDefinition MaxWidth="53.3"></ColumnDefinition>
+                <ColumnDefinition MaxWidth="53.3"></ColumnDefinition>
+                <ColumnDefinition MaxWidth="53.3"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Margin="10" BorderThickness="0">
+            <Button Grid.Row="0" Grid.Column="0" Margin="10" Width="25" BorderThickness="0" HorizontalAlignment="Left"
+                    MaxWidth="25">
                 <Button.Background>
                     <ImageBrush ImageSource="/Menu.png" Stretch="Uniform" TileMode="None"/>
                 </Button.Background>
             </Button>
 
-            <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="2" FontSize="26" Padding="0 0 0 9" >Standard</Label>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="26" 
+                   Padding="0 0 0 9" HorizontalContentAlignment="Left" MaxWidth="106"
+                   >Standard</Label>
             <Button Grid.Row="0" Grid.Column="3" FontSize="18" VerticalAlignment="Top" 
                     HorizontalAlignment="Right" FontFamily="Segoe MDL2 Assets" 
                     Content="&#xE744;" Margin="0 5 7 0"  BorderBrush="Transparent"></Button>
+
             <Button Grid.Row="0" Grid.Column="5" FontSize="18"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     FontFamily="Segoe MDL2 Assets" BorderBrush="Transparent"
                     Content="&#xE81C;" Margin="0 7 7 0"></Button>
-            
+
+            <Button FontSize="13" Grid.Row="2" Grid.Column="0" IsEnabled="False">MC</Button>
+            <Button FontSize="13" Grid.Row="2" Grid.Column="1" IsEnabled="False">MR</Button>
+            <Button FontSize="13" Grid.Row="2" Grid.Column="2">M+</Button>
+            <Button FontSize="13" Grid.Row="2" Grid.Column="3">M-</Button>
+            <Button FontSize="13" Grid.Row="2" Grid.Column="4">MS</Button>
+            <Button FontSize="13" Grid.Row="2" Grid.Column="5" IsEnabled="False">M🢓</Button>
+
         </Grid>
 
         <Grid Grid.Row="1">
