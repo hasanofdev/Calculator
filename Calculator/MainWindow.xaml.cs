@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,23 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string doublePattern = @"^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            InputTxt.Text += (sender as Button).Content.ToString();
+        }
+
+        private void InputTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            TextBox? txt = sender as TextBox;
+            if (!Regex.IsMatch(txt!.Text, doublePattern))
+                txt.Text = txt.Text.Trim(txt.Text[txt.Text.Length - 1]);
         }
     }
 }

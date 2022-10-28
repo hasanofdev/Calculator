@@ -18,8 +18,9 @@
 
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" MaxHeight="40"></RowDefinition>
                 <RowDefinition Height="0.3*"></RowDefinition>
-                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="0.23*"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -32,7 +33,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Margin="10" Width="25" BorderThickness="0" HorizontalAlignment="Left"
+            <Button MaxHeight="23.77" Grid.Row="0" Grid.Column="0" Margin="10" Width="25" BorderThickness="0" HorizontalAlignment="Left"
                     MaxWidth="25">
                 <Button.Background>
                     <ImageBrush ImageSource="/Menu.png" Stretch="Uniform" TileMode="None"/>
@@ -45,18 +46,26 @@
             <Button Grid.Row="0" Grid.Column="3" FontSize="18" VerticalAlignment="Top" 
                     HorizontalAlignment="Right" FontFamily="Segoe MDL2 Assets" 
                     Content="&#xE744;" Margin="0 5 7 0"  BorderBrush="Transparent"></Button>
-
             <Button Grid.Row="0" Grid.Column="5" FontSize="18"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     FontFamily="Segoe MDL2 Assets" BorderBrush="Transparent"
                     Content="&#xE81C;" Margin="0 7 7 0"></Button>
 
-            <Button FontSize="13" Grid.Row="2" Grid.Column="0" IsEnabled="False">MC</Button>
-            <Button FontSize="13" Grid.Row="2" Grid.Column="1" IsEnabled="False">MR</Button>
-            <Button FontSize="13" Grid.Row="2" Grid.Column="2">M+</Button>
-            <Button FontSize="13" Grid.Row="2" Grid.Column="3">M-</Button>
-            <Button FontSize="13" Grid.Row="2" Grid.Column="4">MS</Button>
-            <Button FontSize="13" Grid.Row="2" Grid.Column="5" IsEnabled="False">M🢓</Button>
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
+                   HorizontalContentAlignment="Right" VerticalContentAlignment="Top"
+                   FontSize="20">12</Label>
+
+            <TextBox Name ="InputTxt" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
+                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   FontSize="45" Background="#FFE6E6E6" BorderThickness="0" IsEnabled="False"
+                     TextChanged="InputTxt_TextChanged"></TextBox>
+
+            <Button BorderThickness="0" Margin="1" FontSize="13" Grid.Row="3" Grid.Column="0" IsEnabled="False">MC</Button>
+            <Button BorderThickness="0" Margin="1" FontSize="13" Grid.Row="3" Grid.Column="1" IsEnabled="False">MR</Button>
+            <Button BorderThickness="0" Margin="1" FontSize="13" Grid.Row="3" Grid.Column="2">M+</Button>
+            <Button BorderThickness="0" Margin="1" FontSize="13" Grid.Row="3" Grid.Column="3">M-</Button>
+            <Button BorderThickness="0" Margin="1" FontSize="13" Grid.Row="3" Grid.Column="4">MS</Button>
+            <Button BorderThickness="0" Margin="1" FontSize="13" Grid.Row="3" Grid.Column="5" IsEnabled="False">M🢓</Button>
 
         </Grid>
 
@@ -87,25 +96,25 @@
             <Button Grid.Column="2" Grid.Row="1" FontSize="15" Background="White" BorderBrush="#FFE6E6E6">²√x</Button>
             <Button Grid.Column="3" Grid.Row="1" FontSize="25" Background="White" BorderBrush="#FFE6E6E6">÷</Button>
 
-            <Button Grid.Column="0" Grid.Row="2" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">1</Button>
-            <Button Grid.Column="1" Grid.Row="2" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">2</Button>
-            <Button Grid.Column="2" Grid.Row="2" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">3</Button>
+            <Button Grid.Column="0" Grid.Row="2" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">1</Button>
+            <Button Grid.Column="1" Grid.Row="2" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">2</Button>
+            <Button Grid.Column="2" Grid.Row="2" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">3</Button>
             <Button Grid.Column="3" Grid.Row="2" FontSize="25" Background="White" BorderBrush="#FFE6E6E6">×</Button>
 
-            <Button Grid.Column="0" Grid.Row="3" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">4</Button>
-            <Button Grid.Column="1" Grid.Row="3" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">5</Button>
-            <Button Grid.Column="2" Grid.Row="3" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">6</Button>
+            <Button Grid.Column="0" Grid.Row="3" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">4</Button>
+            <Button Grid.Column="1" Grid.Row="3" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">5</Button>
+            <Button Grid.Column="2" Grid.Row="3" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">6</Button>
             <Button Grid.Column="3" Grid.Row="3" FontSize="25" Background="White" BorderBrush="#FFE6E6E6">−</Button>
 
-            <Button Grid.Column="0" Grid.Row="4" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">7</Button>
-            <Button Grid.Column="1" Grid.Row="4" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">8</Button>
-            <Button Grid.Column="2" Grid.Row="4" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">9</Button>
+            <Button Grid.Column="0" Grid.Row="4" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">7</Button>
+            <Button Grid.Column="1" Grid.Row="4" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">8</Button>
+            <Button Grid.Column="2" Grid.Row="4" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">9</Button>
             <Button Grid.Column="3" Grid.Row="4" FontSize="25" Background="White" BorderBrush="#FFE6E6E6">+</Button>
 
             <Button Grid.Column="0" Grid.Row="5" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">⁺/₋</Button>
-            <Button Grid.Column="1" Grid.Row="5" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">0</Button>
-            <Button Grid.Column="2" Grid.Row="5" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">.</Button>
-            <Button Grid.Column="3" Grid.Row="5" FontSize="20" Background="White" BorderBrush="#FFE6E6E6">=</Button>
+            <Button Grid.Column="1" Grid.Row="5" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">0</Button>
+            <Button Grid.Column="2" Grid.Row="5" FontSize="20" Background="White" BorderBrush="#FFE6E6E6" Click="Button_Click">.</Button>
+            <Button Grid.Column="3" Grid.Row="5" FontSize="20" Background="#70b0e1" BorderBrush="#FFE6E6E6">=</Button>
         </Grid>
     </Grid>
 </Window>
