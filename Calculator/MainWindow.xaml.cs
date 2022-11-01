@@ -22,60 +22,114 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string operation = "";
-        public string doublePattern = @"^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public double Answer { get; private set; }
+        private double _result;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonNumber_Click(object sender, RoutedEventArgs e)
         {
-            Button? btn = sender as Button;
-            if (InputTxt.Text.StartsWith('0') && InputTxt.Text.Length == 1)
+            if (sender is Button btn)
             {
-                if (int.TryParse(btn!.Content.ToString(), out int result))
+                if (InputTxt.Text == "0")
+                    InputTxt.Text = string.Empty;
+
+                InputTxt.Text += btn.Content.ToString();
+            }
+        }
+
+        private void ButtonSymbol_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(InputTxt.Text))
+                return;
+
+            if (sender is Button btn)
+            {
+                if (btn.Content.ToString() == "C" || btn.Content.ToString() == "CE")
                 {
-                    InputTxt.Text = result.ToString();
+                    InputTxt.Text = "0";
                     return;
                 }
+
+                if (char.IsDigit(InputTxt.Text[InputTxt.Text.Length - 1]) || InputTxt.Text[InputTxt.Text.Length - 1] == '.' && btn.Content.ToString() != "." || InputTxt.Text[InputTxt.Text.Length - 1] == ',' && btn.Content.ToString() != ".")
+                    InputTxt.Text += btn.Content.ToString();
             }
-
-            InputTxt!.Text += btn!.Content.ToString();
         }
 
-        private void InputTxt_TextChanged(object sender, TextChangedEventArgs e)
+        private void ButtonResult_Click(object sender, RoutedEventArgs e)
         {
-            TextBox? txt = sender as TextBox;
-            if (!Regex.IsMatch(txt!.Text, doublePattern) && txt.Text.Length > 0)
-                txt.Text = txt.Text.Trim(txt.Text[txt.Text.Length - 1]);
+            if (string.IsNullOrEmpty(InputTxt.Text))
+                return;
+
+            if (!char.IsDigit(InputTxt.Text[InputTxt.Text.Length - 1]) && InputTxt.Text[InputTxt.Text.Length - 1] != '.')
+                return;
+
+            CalculateResult();
+            InputTxt.Text = _result.ToString();
         }
 
-        private void Operator_Click(object sender, RoutedEventArgs e)
+        private void ButtonOperation_Click(object sender, RoutedEventArgs e)
         {
-            Button? btn = sender as Button;
+            if (string.IsNullOrEmpty(InputTxt.Text))
+                return;
 
-            if (!Regex.IsMatch(InputTxt.Text, "[0-9]\\d+\\s[+|\\-|\\*|/]"))
-                operation = InputTxt.Text + " " + (string)btn!.Tag + " ";
-            else operation += InputTxt.Text + " " + (string)btn!.Tag;
+            if (sender is Button btn)
+            {
+                if (InputTxt.Text.Contains('+') || InputTxt.Text.Contains('-') || InputTxt.Text.Contains('*') || InputTxt.Text.Contains('/'))
+                    CalculateResult();
 
-            OperationTxt.Text = operation;
+                if (_result == 0)
+                {
+                    if (!double.TryParse(InputTxt.Text, out _result))
+                        return;
+                }
+
+                _result = btn.Content.ToString() switch
+                {
+                    "%" => _result / 100,
+                    "+/-" => _result * -1,
+                    "1/x" => 1 / _result,
+                    "x²" => Math.Pow(_result, 2),
+                    "√x" => Math.Sqrt(_result),
+                    _ => _result
+                };
+
+                if (_result.ToString() == "∞")
+                {
+                    MessageBox.Show("Cannot Divide by zero");
+                    InputTxt.Text = "0";
+                    return;
+                }
+
+                InputTxt.Text = _result.ToString();
+            }
         }
 
-        private void TogetherBtn_Click(object sender, RoutedEventArgs e)
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
-            operation += InputTxt.Text;
+            if (string.IsNullOrEmpty(InputTxt.Text))
+                return;
 
-            if (!Regex.IsMatch(operation, "[0-9]\\d+\\s[+|\\-|\\*|/]\\s\\d+\\s\\=\\s\\d+"))
-                Answer = double.Parse(new DataTable().Compute(operation, null).ToString()!);
-            else Answer = double.Parse(new DataTable().Compute(operation.Split(' ')[3], null).ToString()!);
-                
+            InputTxt.Text = InputTxt.Text.Remove(InputTxt.Text.Length - 1);
+        }
 
+        private void ButtonUnidentified_Click(object sender, RoutedEventArgs e) => MessageBox.Show("Unidentified");
 
-            OperationTxt.Text = operation + (sender as Button)!.Tag.ToString();
-            InputTxt.Text = Answer.ToString();
+        private void CalculateResult()
+        {
+            string formattedCalculation = InputTxt.Text;
+            try
+            {
+                _result = double.Parse(new DataTable().Compute(formattedCalculation, null).ToString()!);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                _result = 0;
+            }
         }
     }
 }
